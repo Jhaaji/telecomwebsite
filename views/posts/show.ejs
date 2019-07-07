@@ -1,0 +1,38 @@
+<%include ../partials/header%>
+
+
+
+<div class="container img-responsive" >
+    <div class="row">
+        <div class="col-md-9" style="background:white">
+             
+            <h1><%= post.question %></h1>
+            <hr>
+           
+              <%post.answers.forEach(function(answer){%>
+              
+                <div class="row">
+                    <div class="col-md-12">
+                         <div class="well">
+                <%=answer.text%><br>
+                <span class="pull-right"><strong><%=answer.author.username%></strong></span>
+                </div>
+                </div>
+               
+                </div>
+              <%  });%>
+              
+        </div>
+        <div class="col-md-3">
+           
+            <%include ../partials/commentmodal%>
+            
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
