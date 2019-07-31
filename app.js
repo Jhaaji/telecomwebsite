@@ -13,6 +13,7 @@ var crypto=require("crypto");
 var methodOverride=require("method-override");
 
 
+//comments
 mongoose.set('useCreateIndex', true);
 //Passport configuration
 app.use(require("express-session")({
