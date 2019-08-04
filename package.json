@@ -2,7 +2,8 @@
   "name": "gyaanbaato",
   "version": "1.0.0",
   "engines": {
-    "node":"11.12.0"
+    "node":"11.12.0",
+    "npm": "6.7.0"
   },
   "description": "raise your questions and have them answered ",
   "main": "app.js",
