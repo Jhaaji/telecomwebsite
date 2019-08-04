@@ -38,9 +38,10 @@ app.use(bodyParser.urlencoded({extended:true}));
 
 
 //mongoose.connect("mongodb://localhost/xyz",{ useNewUrlParser: true });
- 
 
-mongoose.connect("mongodb://prabhakar:PkJhA028@ds123664.mlab.com:23664/gyaandoo",{ useNewUrlParser: true });
+mongoose.connect(process.env.DATABASEURL,{useNewUrlParser: true}) ;
+
+//mongoose.connect("mongodb://prabhakar:PkJhA028@ds123664.mlab.com:23664/gyaandoo",{ useNewUrlParser: true });
 
 
 
