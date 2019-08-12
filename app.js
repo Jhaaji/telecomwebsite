@@ -59,14 +59,23 @@ var rand,mailOptions;
 
 
 app.get("/", function(req,res){
-   Post.find({},function(error,allPosts){
-     if(error)
-      console.log("error");
+ //  Post.find({},function(error,allPosts){
+ //    if(error)
+ //     console.log("error");
+  //   else
+  //   {
+  //    res.render("posts/index",{posts : allPosts,currentUser : req.user});
+  //   }
+  // })
+  
+  Post.find({}).sort([['posted_at', -1]]).exec(function(err, allPosts) { 
+      if(err)
+     console.log("error");
      else
      {
       res.render("posts/index",{posts : allPosts,currentUser : req.user});
      }
-   })
+  });
 });
 
 
