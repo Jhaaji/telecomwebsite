@@ -84,8 +84,8 @@ app.post("/",isLoggedIn, function(req,res){
     var question=req.body.question;
     var author={
         id :req.user._id,
-        username :req.user.username 
-        
+        username :req.user.username ,
+        alias :req.user.alias
     };
     var newPost={question : question, author : author};
     Post.create(newPost,function(error,newlyCreatedPost){

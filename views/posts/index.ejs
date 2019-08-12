@@ -10,10 +10,11 @@
     
     <div class="row">
         
-        
+        <div class="col-md-2">
+            </div>
          
         
-        <div class="col-md-9">
+        <div class="col-md-8">
       <% posts.forEach(function(post){ %>
             
                     <a href="/posts/<%=post._id%>" style="color:black">
@@ -23,18 +24,12 @@
                     </a>
                     
                 
-                <div >
-                    <span class="glyphicon glyphicon-hand-right"></span>
-                    <a class="btn btn-xs btn-primary disabled">
-                        Note
-                     </a>
-                        <span>
-                            <%=post.notes_count%>
-                        </span>
-                        <h5><a href="/users/<%=post.author.id%>"  style="color:black">
-                        <%= post.author.username %>
-                        </a></h5>
-                    <h6> <em><%=post.posted_at.toUTCString()%></em> </h6>
+                <div>
+                        
+                        <h6>by <a href="/users/<%=post.author.id%>"  style="color:black">
+                        <%= post.author.alias %>
+                        </a> on
+                     <em><%=post.posted_at.toUTCString()%></em> </h6>
                       
                    
                 </div>
@@ -46,7 +41,7 @@
         <% }); %>
       
        </div>
-        <div class="col-md-3 text-center">
+        <div class="col-md-2 text-center">
             <%include ../partials/postmodal%>
         </div>
     </div>
