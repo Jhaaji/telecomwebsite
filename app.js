@@ -231,7 +231,7 @@ app.get("/login",function(req,res){
 
 app.post("/login",passport.authenticate("local",
  {
-   successRedirect:"/",
+   successRedirect:"/posts",
    failureRedirect:"/login"
  }
 ),function(req,res){
@@ -241,7 +241,7 @@ app.post("/login",passport.authenticate("local",
 
 app.get("/logout",function(req,res){
   req.logout();
-  res.redirect("/");
+  res.redirect("/posts");
 });
 
 
