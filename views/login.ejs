@@ -1,21 +1,28 @@
 <% include partials/header %>
 
+
 <div class="container">
 
-<h1 style="text-align:center">Log in to Gyaanbaato</h1>
- 
+
+ <div class="row">
+     <div class=col-md-4></div>
+     <div class=col-md-4>
+         <h3 style="text-align:center">Sign In</h3>
 <form action="/login" method="POST">
     <div class="form-group">
+        <label> Email</label>
     <input class="form-control" type="email" placeholder="email" name="username" required="required">
     </div>
     <div class="form-group">
+        
+        <label> Password</label>
+            <a class="text-right" href="/forgot">Forgot ?</a>
      <input class="form-control" type="password" placeholder="password" name="password" required="required">
      </div>
      <div class="form-group">
     <button class="btn btn-lg btn-default"> Login </button>
     </div>
 </form>
-
 </div>
-
-<% include partials/footer %>
+</div>
+</div>

@@ -213,6 +213,7 @@ app.post("/register",function(req,res){
          console.log("how are?");
        passport.authenticate("local")(req,res,function(){
            console.log("how are you ? ");
+           req.logout();
          res.redirect("/login");
        });
      }

@@ -1,35 +1,44 @@
 <% include partials/header %>
 
 <div class="container">
-
-<h1 style="text-align:center">Sign up to your Discussion Forum</h1>
+<div class="row">
+ <div class="col-md-4">
+  </div>
+  <div class="col-md-4">
+<h1 style="text-align:center">Sign Up </h1>
 
 <form action="/register" method="POST">
     <div class="form-group">
+     <label>Email</label>
     <input class="form-control" type="email" placeholder="email" name="username" required="required">
     </div>
     
     <div class="form-group">
+      <label>First Name</label>
     <input class="form-control" type="text" placeholder="first name" name="firstname" required="required">
     </div>
     
     <div class="form-group">
+      <label>Last Name</label>
     <input class="form-control" type="text" placeholder="last name" name="lastname" required="required">
     </div>
     
     <div class="form-group">
-    <input class="form-control" type="text" placeholder="Alias" name="alias" required="required">
+      <label>ALias</label>
+    <input class="form-control" type="text" placeholder="your pen name" name="alias" required="required">
     </div>
     
      <div class="form-group">
-    <input class="form-control" type="text" placeholder="Admin Code" name="adminCode">
+       <label>Admin Code</label>
+    <input class="form-control" type="text" placeholder="Secret Code (only for Admins)" name="adminCode">
     </div>
     
      <div class="form-group">
     <button type="submit" class="btn btn-lg btn-default"> Sign Up </button>
     </div>
 </form>
-
+</div>
+</div>
 </div>
 
 <% include partials/footer %>
