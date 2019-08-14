@@ -58,7 +58,7 @@ var rand,mailOptions;
 
 
 
-app.get("/", function(req,res){
+app.get("/posts", function(req,res){
  //  Post.find({},function(error,allPosts){
  //    if(error)
  //     console.log("error");
@@ -152,6 +152,13 @@ app.post("/posts/:id/answers",isLoggedIn,function(req,res){
  });
 });*/
 // "5ca58f9910eb7015b182fa2b")
+
+
+//landing
+app.get("/",function(req,res){
+   res.render("home"); 
+});
+
 
 
 //Authentication routes
