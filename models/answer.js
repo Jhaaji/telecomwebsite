@@ -3,7 +3,7 @@ var mongoose=require("mongoose");
 
 
 var moment = require('moment-timezone');
-var dateThailand = moment.tz(Date.now(), "Asia/Bangkok");
+
 
 
 var answerSchema=new mongoose.Schema({
@@ -18,10 +18,11 @@ var answerSchema=new mongoose.Schema({
    username : String
  },
  
- posted_at: {type : Date, default : dateThailand},
+ posted_at: {type : Date, default : Date.now},
  
- likes_count: {type : Number, default : 5 }
+
 
 });
 
 module.exports= mongoose.model("Answer",answerSchema);
+// likes: [{ type: mongoose.Schema.ObjectId, ref: 'User' }]

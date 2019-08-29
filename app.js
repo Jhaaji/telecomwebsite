@@ -58,7 +58,7 @@ var rand,mailOptions;
 
 
 
-app.get("/posts", function(req,res){
+app.get("/posts/page/:page", function(req,res){
  //  Post.find({},function(error,allPosts){
  //    if(error)
  //     console.log("error");
@@ -67,13 +67,14 @@ app.get("/posts", function(req,res){
   //    res.render("posts/index",{posts : allPosts,currentUser : req.user});
   //   }
   // })
-  
-  Post.find({}).sort([['posted_at', -1]]).exec(function(err, allPosts) { 
+  var perpage = 10;
+  var pagecount=parseInt(req.params.page);
+  Post.find({}).skip(perpage*(req.params.page-1)).limit(perpage).sort([['posted_at', -1]]).exec(function(err, allPosts) { 
       if(err)
      console.log("error");
      else
      {
-      res.render("posts/index",{posts : allPosts,currentUser : req.user});
+      res.render("posts/index",{pagecount:pagecount,posts : allPosts,currentUser : req.user});
      }
   });
 });
@@ -106,6 +107,8 @@ app.get("/new",function(req,res){
 
 
 app.get("/posts/:id",function(req,res){
+    
+    
   Post.findById(req.params.id).populate("answers").exec(function(err,foundPost){
      if(err)
       console.log(err);
@@ -141,6 +144,12 @@ app.post("/posts/:id/answers",isLoggedIn,function(req,res){
    }
  });
 });
+
+
+
+//like answers
+
+
 
 /*app.get("/posts/:id/answers/new",isLoggedIn, function(req,res){
  Post.findById(req.params.id,function(err,post){

@@ -1,6 +1,33 @@
 <% include ../partials/header %>
 
 
+ <style>
+    .pagination {
+         display: inline-block;
+    }
+
+    .pagination a {
+          color: black;
+          float: left;
+          padding: 8px 16px;
+          text-decoration: none;
+          transition: background-color .3s;
+          border: 1px solid #ddd;
+          margin: 0 4px;
+    }
+
+    .pagination a.active {
+         background-color: #4CAF50;
+        color: white;
+        border: 1px solid #4CAF50;
+    }
+
+    .pagination a:hover:not(.active) {background-color: #4CAF50;}
+    
+    }
+</style>
+
+
 
 <div class="container">
     
@@ -37,7 +64,38 @@
            
             
         <% }); %>
-      
+        
+        <div class="pagination">
+            <% var i,j;%>
+            
+            <% if(pagecount>5){%>
+                <a  href="/posts/page/<%=pagecount-5%>">&laquo; Prev 5</a>
+            <% } %>
+            
+            <% if(pagecount>5){%>
+                <a href="/posts/page/<%=pagecount-1%>">&laquo;</a>
+             <% } %>
+             
+             <%for (i=pagecount-2,j=1; j<=5; i++) { %>
+             
+             
+               <% if(i>0) { %>
+               
+                    <%if(i==pagecount){ %>
+                        <a class= "active" href="/posts/page/<%=i%>"><%=i%></a>
+                    <%} else{ %>
+                    <a href="/posts/page/<%=i%>"><%=i%></a>
+                    <%}%>
+                    <%j++%>
+                <% } %>
+                
+              <% } %>
+              
+              <a href="/posts/page/<%=pagecount+1%>">&raquo;</a>
+              <a href="/posts/page/<%=pagecount+5%>">Skip 5 &raquo;</a>
+              
+            </div>
+  
        </div>
         <div class="col-md-2 text-center">
             <%include ../partials/postmodal%>
