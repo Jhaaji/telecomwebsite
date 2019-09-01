@@ -28,7 +28,13 @@ function updateLikes() {
         <div class="col-md-9" style="background:white">
              
             <h1><%= post.question %></h1>
+             <% if(currentUser && post.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin){ %>
+            <%include ../partials/editpost%>
+            <%include ../partials/deletepost%>
+            <br>
+            <%}%>
             <%=post.answers.length%> Answers 
+            
             <hr>
            
               <%post.answers.forEach(function(answer){%>

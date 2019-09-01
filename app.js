@@ -34,7 +34,7 @@ app.use(function(req,res,next){
 });
 
 app.set("view engine", "ejs");
-app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.urlencoded({extended:false}));
 
 
 //mongoose.connect("mongodb://localhost/xyz",{ useNewUrlParser: true });
@@ -52,7 +52,7 @@ var smtpTransport = nodemailer.createTransport({
         pass: 'ldanfhxuhbvxfgjd'
     }
 });
-var rand,mailOptions;
+var rand,mailOptions,refer;
 
         
 
@@ -145,8 +145,48 @@ app.post("/posts/:id/answers",isLoggedIn,function(req,res){
  });
 });
 
+//EDIT POST
+app.get("/posts/:id/editpost",function(req,res){
+    Post.findById(req.params.id, function(err,foundPost){
+        if(err){
+            res.redirect("/posts/page/1");
+        }
+        else{
+            res.render("posts/edit",{post:foundPost});
+        }
+    })
+    
+});
 
+app.post("/editpost", function(req,res){
+    if(req.isAuthenticated()){
+    var data = req.body.question;
+    console.log(data);
+    Post.findByIdAndUpdate(req.body.postid,{question:data},{upsert:true},function(err, updatedPost){
+        if(err){
+            console.log(err);
+            res.redirect('/posts/'+req.body.postid);
+        }else{
+            console.log(updatedPost);
+            res.redirect('posts/'+req.body.postid);
+        }
+    });}
+    else{
+        res.render('partials/editpost')
+    }
+});
+// DELETE POST
 
+app.post("/deletepost",function(req,res){
+    console.log("delete")
+    Post.deleteOne({_id:req.body.postid},function(err){
+        if(err){
+            console.log(err);
+        }
+        else
+        res.redirect("/posts/page/1");
+    });
+});
 //like answers
 
 
@@ -186,14 +226,15 @@ app.post("/register",function(req,res){
         html : "Hello,<br> The password for your gyaandoo account "+req.body.username+" is " + req.body.password + " ."
     };
    
-  
+  refer=Math.floor((Math.random() * 100) + 123);
+  var referral=req.body.alias+refer;
   var newUser= new User(
       {
           username : req.body.username,
           firstname : req.body.firstname,
           lastname : req.body.lastname,
           alias : req.body.alias,
-          
+          referralCode : referral
       });
       
     
@@ -201,6 +242,17 @@ app.post("/register",function(req,res){
   if(req.body.adminCode==='secretcode123'){
       newUser.isAdmin = true ;
   }
+  User.findOne({"referralCode":req.body.reference},function(err,user){
+      if(err)
+      {
+          console.log(err);
+      }
+      else{
+          user.points=user.points+50;
+          newUser.points=newUser.points+50;
+          
+      }
+  });
   
   User.register(newUser,req.body.password,function(err,user){
     if(err){
@@ -240,7 +292,7 @@ app.get("/login",function(req,res){
 
 app.post("/login",passport.authenticate("local",
  {
-   successRedirect:"/posts",
+   successRedirect:"/posts/page/1",
    failureRedirect:"/login"
  }
 ),function(req,res){
@@ -250,7 +302,7 @@ app.post("/login",passport.authenticate("local",
 
 app.get("/logout",function(req,res){
   req.logout();
-  res.redirect("/posts");
+  res.redirect("/posts/page/1");
 });
 
 
