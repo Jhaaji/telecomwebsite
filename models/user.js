@@ -12,7 +12,7 @@ var userSchema=new mongoose.Schema({
  resetPasswordToken :String,
  resetPasswordExpires :Date,
  isAdmin : {type : Boolean, default : false},
- referralCode :{type : String},
+ referralCode :{type : String,default : "noreferral"},
  points : {type :Number, default:0}
 
 });

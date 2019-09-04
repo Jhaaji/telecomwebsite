@@ -95,7 +95,7 @@ app.post("/",isLoggedIn, function(req,res){
      else
      {
          console.log(newlyCreatedPost);
-      res.redirect("/");
+      res.redirect("/posts/page/1");
      } 
     })
 });
@@ -242,17 +242,19 @@ app.post("/register",function(req,res){
   if(req.body.adminCode==='secretcode123'){
       newUser.isAdmin = true ;
   }
-  User.findOne({"referralCode":req.body.reference},function(err,user){
-      if(err)
-      {
-          console.log(err);
-      }
-      else{
-          user.points=user.points+50;
-          newUser.points=newUser.points+50;
-          
-      }
-  });
+  console.log(req.body.reference);
+  
+  if((req.body.reference)&&(req.body.reference))
+  {
+      User.findOneAndUpdate({ referralCode: req.body.reference }, { $inc: { points: 50 } }, {new: true },function(err, response) {
+        if (err) {
+         console.log(err);
+            } else {
+         console.log(response);
+         }
+      });
+      
+  }
   
   User.register(newUser,req.body.password,function(err,user){
     if(err){
