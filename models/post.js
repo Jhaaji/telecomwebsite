@@ -16,8 +16,7 @@ var postSchema=new mongoose.Schema({
      type : mongoose.Schema.Types.ObjectId ,
      ref : "User"
    },
-   username : String,
-   alias : String
+   username : String
  },
  answers : [
        {

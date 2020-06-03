@@ -6,6 +6,7 @@ var User=require("./models/user.js");
 var bodyParser=require("body-parser");
 var mongoose=require("mongoose");
 var Post=require("./models/post.js");
+var Mark=require("./models/mark.js")
 var Answer=require("./models/answer.js");
 var asyn = require("async");
 var nodemailer=require("nodemailer");
@@ -37,9 +38,9 @@ app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended:false}));
 
 
-//mongoose.connect("mongodb://localhost/xyz",{ useNewUrlParser: true });
+mongoose.connect("mongodb://satyam:satyam1@ds157707.mlab.com:57707/studentdatabase",{ useNewUrlParser: true });
 
-mongoose.connect(process.env.DATABASEURL,{useNewUrlParser: true}) ;
+//mongoose.connect(process.env.DATABASEURL,{useNewUrlParser: true}) ;
 
 //mongoose.connect("mongodb://prabhakar:PkJhA028@ds123664.mlab.com:23664/gyaandoo",{ useNewUrlParser: true });
 
@@ -58,7 +59,7 @@ var rand,mailOptions,refer;
 
 
 
-app.get("/posts/page/:page", function(req,res){
+app.get("/students", function(req,res){
  //  Post.find({},function(error,allPosts){
  //    if(error)
  //     console.log("error");
@@ -67,17 +68,29 @@ app.get("/posts/page/:page", function(req,res){
   //    res.render("posts/index",{posts : allPosts,currentUser : req.user});
   //   }
   // })
-  var perpage = 10;
-  var pagecount=parseInt(req.params.page);
-  Post.find({}).skip(perpage*(req.params.page-1)).limit(perpage).sort([['posted_at', -1]]).exec(function(err, allPosts) { 
+ 
+  User.find(function(err, allUsers) { 
       if(err)
-     console.log("error");
+        {console.log("error");}
      else
      {
-      res.render("posts/index",{pagecount:pagecount,posts : allPosts,currentUser : req.user});
+      res.render("marks/students",{students : allUsers});
      }
   });
 });
+
+app.get("/student/:username",function(req,res){
+   Mark.find(function(err, all) {
+      if(err)
+        {console.log("error");}
+     else
+     {
+      res.render("marks/eachstudent",{marks : all,student : req.params.username});
+     }
+  });
+
+})
+
 
 
 
@@ -145,6 +158,37 @@ app.post("/posts/:id/answers",isLoggedIn,function(req,res){
  });
 });
 
+app.post("/marks/new",isLoggedIn,function(req,res){
+    var semester=req.body.semester;
+    var student={
+        id :req.user._id,
+        username :req.user.username
+    };
+    var newMark={Semester : semester, student : student, code : req.body.code, merit : req.body.merit, grade : req.body.grade};
+    Mark.create(newMark,function(error,newlyCreatedMark){
+     if(error)
+      console.log(error);
+     else
+     {
+         console.log(newlyCreatedMark);
+      res.redirect("/marks");
+     } 
+    })
+});
+
+
+app.get("/allmarksall",function(req,res){
+    Mark.find(function(err,all){
+        if(err){
+            res.redirect("/posts/page/1");
+        }
+        else{
+            res.send(all)
+        }
+    })
+    
+});
+
 //EDIT POST
 app.get("/posts/:id/editpost",function(req,res){
     Post.findById(req.params.id, function(err,foundPost){
@@ -207,7 +251,9 @@ app.post("/deletepost",function(req,res){
 app.get("/",function(req,res){
    res.render("home"); 
 });
-
+app.get("/marks",function(req,res){
+    res.render("marks/new");
+});
 
 
 //Authentication routes
@@ -216,44 +262,21 @@ app.get("/register",function(req,res){
 });
 
 app.post("/register",function(req,res){
-  
-    
-   rand=Math.floor((Math.random() * 100) + 54);
-    req.body.password=req.body.alias+rand  ;
-    mailOptions={
-        to : req.body.username,
-        subject : "Please confirm your Email account",
-        html : "Hello,<br> The password for your gyaandoo account "+req.body.username+" is " + req.body.password + " ."
-    };
    
   refer=Math.floor((Math.random() * 100) + 123);
-  var referral=req.body.alias+refer;
-  var newUser= new User(
+  var referral = req.body.alias+refer;
+  var newUser = new User(
       {
           username : req.body.username,
           firstname : req.body.firstname,
           lastname : req.body.lastname,
-          alias : req.body.alias,
-          referralCode : referral
+          
       });
       
     
       
   if(req.body.adminCode==='secretcode123'){
       newUser.isAdmin = true ;
-  }
-  console.log(req.body.reference);
-  
-  if((req.body.reference)&&(req.body.reference))
-  {
-      User.findOneAndUpdate({ referralCode: req.body.reference }, { $inc: { points: 50 } }, {new: true },function(err, response) {
-        if (err) {
-         console.log(err);
-            } else {
-         console.log(response);
-         }
-      });
-      
   }
   
   User.register(newUser,req.body.password,function(err,user){
@@ -262,20 +285,9 @@ app.post("/register",function(req,res){
      res.render("register");
     }
     else
-     {
-         
-        smtpTransport.sendMail(mailOptions, function(error, info){
-     if(error){
-            console.log(error);
-        //res.send("error");
-     }else{
-         console.log("Message sent: "+info.response);
-        //res.send("sent");
-         }
-     });     
-         console.log("how are?");
+     {  
        passport.authenticate("local")(req,res,function(){
-           console.log("how are you ? ");
+
            req.logout();
          res.redirect("/login");
        });
@@ -294,7 +306,7 @@ app.get("/login",function(req,res){
 
 app.post("/login",passport.authenticate("local",
  {
-   successRedirect:"/posts/page/1",
+   successRedirect:"/marks",
    failureRedirect:"/login"
  }
 ),function(req,res){
@@ -304,7 +316,7 @@ app.post("/login",passport.authenticate("local",
 
 app.get("/logout",function(req,res){
   req.logout();
-  res.redirect("/posts/page/1");
+  res.redirect("/");
 });
 
 
@@ -483,6 +495,6 @@ function isLoggedIn(req, res, next) {
 }
 
 
-app.listen(process.env.PORT,process.env.IP,function(){
+app.listen(3000,'127.0.0.1',function(){
     console.log("server started");
 });

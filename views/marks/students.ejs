@@ -1,0 +1,19 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <div class="row">
+        <%students.forEach(function(student){%>
+            <div class="col-md-4 text-center">
+                 <div class="panel panel-primary">
+                    <div class="panel-heading"><%=student.firstname%> <%=student.lastname%></div>
+                <div class="panel-body"><%=student.username%><br>
+                    <a href="/student/<%=student.username%>"class="btn btn-primary btn-sm">view marks</a>
+                </div>
+                
+                 </div>
+             </div>
+        <%})%>
+    </div>
+</div>
+
+<% include ../partials/footer %>

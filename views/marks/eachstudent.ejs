@@ -1,0 +1,267 @@
+<% include ../partials/header %>
+
+<div class="container">
+
+
+ <div class="row">
+        
+            <div class="col-md-6 text-center">
+                 <div class="panel panel-primary">
+                    <div class="panel-heading">1st sem</div>
+                <div class="panel-body">
+                    <table class="table">
+                      <tr>  <th margin=>code</th><th>credit</th><th>marks</th> </tr>
+          <% marks.forEach(function(mark){ %>
+
+            <% if(mark.student.username==student) {%>
+
+                <% if(mark.Semester==1) {%>
+                <tr>
+                     <td>
+                    <%=mark.code%>
+                        
+                    </td>
+                    <td><%=mark.merit%></td>
+                    <td><%=mark.grade%></td>
+                </tr>
+                  <%}%>
+             <%}%>
+
+           <%})%>
+
+                    </table>
+                    
+                </div>
+                
+                 </div>
+             </div>
+       
+            <div class="col-md-6 text-center">
+                 <div class="panel panel-primary">
+                    <div class="panel-heading">2nd sem</div>
+                <div class="panel-body">
+
+                     <table class="table">
+                      <tr>  <th margin=>code</th><th>credit</th><th>marks</th> </tr>
+          <% marks.forEach(function(mark){ %>
+
+            <% if(mark.student.username==student) {%>
+
+                <% if(mark.Semester==2) {%>
+                <tr>
+                     <td>
+                    <%=mark.code%>
+                        
+                    </td>
+                    <td><%=mark.merit%></td>
+                    <td><%=mark.grade%></td>
+                </tr>
+                  <%}%>
+             <%}%>
+
+           <%})%>
+
+                    </table>
+                    
+                </div>
+                
+                 </div>
+             </div>
+             
+            <div class="col-md-6 text-center">
+                 <div class="panel panel-primary">
+                    <div class="panel-heading">3rd sem</div>
+                <div class="panel-body">
+
+                     <table class="table">
+                      <tr>  <th margin=>code</th><th>credit</th><th>marks</th> </tr>
+          <% marks.forEach(function(mark){ %>
+
+            <% if(mark.student.username==student) {%>
+
+                <% if(mark.Semester==3) {%>
+                <tr>
+                     <td>
+                    <%=mark.code%>
+                        
+                    </td>
+                    <td><%=mark.merit%></td>
+                    <td><%=mark.grade%></td>
+                </tr>
+                  <%}%>
+             <%}%>
+
+           <%})%>
+
+                    </table>
+                    
+                </div>
+                
+                 </div>
+             </div>
+             
+            <div class="col-md-6 text-center">
+                 <div class="panel panel-primary">
+                    <div class="panel-heading">4th sem</div>
+                <div class="panel-body">
+
+                     <table class="table">
+                      <tr>  <th margin=>code</th><th>credit</th><th>marks</th> </tr>
+          <% marks.forEach(function(mark){ %>
+
+            <% if(mark.student.username==student) {%>
+
+                <% if(mark.Semester==4) {%>
+                <tr>
+                     <td>
+                    <%=mark.code%>
+                        
+                    </td>
+                    <td><%=mark.merit%></td>
+                    <td><%=mark.grade%></td>
+                </tr>
+                  <%}%>
+             <%}%>
+
+           <%})%>
+
+                    </table>
+                    
+                </div>
+                
+                 </div>
+             </div>
+            
+            <div class="col-md-6 text-center">
+                 <div class="panel panel-primary">
+                    <div class="panel-heading">5th sem</div>
+                <div class="panel-body">
+
+                     <table class="table">
+                      <tr>  <th margin=>code</th><th>credit</th><th>marks</th> </tr>
+          <% marks.forEach(function(mark){ %>
+
+            <% if(mark.student.username==student) {%>
+
+                <% if(mark.Semester==5) {%>
+                <tr>
+                     <td>
+                    <%=mark.code%>
+                        
+                    </td>
+                    <td><%=mark.merit%></td>
+                    <td><%=mark.grade%></td>
+                </tr>
+                  <%}%>
+             <%}%>
+
+           <%})%>
+
+                    </table>
+                    
+                </div>
+                
+                 </div>
+             </div>
+             
+            <div class="col-md-6 text-center">
+                 <div class="panel panel-primary">
+                    <div class="panel-heading">6th sem</div>
+                <div class="panel-body">
+
+                     <table class="table">
+                      <tr>  <th margin=>code</th><th>credit</th><th>marks</th> </tr>
+          <% marks.forEach(function(mark){ %>
+
+            <% if(mark.student.username==student) {%>
+
+                <% if(mark.Semester===6) {%>
+                <tr>
+                     <td>
+                    <%=mark.code%>
+                        
+                    </td>
+                    <td><%=mark.merit%></td>
+                    <td><%=mark.grade%></td>
+                </tr>
+                  <%}%>
+             <%}%>
+
+           <%})%>
+
+                    </table>
+                    
+                </div>
+                
+                 </div>
+             </div>
+            
+            <div class="col-md-6 text-center">
+                 <div class="panel panel-primary">
+                    <div class="panel-heading">7th sem</div>
+                <div class="panel-body">
+
+                     <table class="table">
+                      <tr>  <th margin=>code</th><th>credit</th><th>marks</th> </tr>
+          <% marks.forEach(function(mark){ %>
+
+            <% if(mark.student.username==student) {%>
+
+                <% if(mark.Semester==7) {%>
+                <tr>
+                     <td>
+                    <%=mark.code%>
+                        
+                    </td>
+                    <td><%=mark.merit%></td>
+                    <td><%=mark.grade%></td>
+                </tr>
+                  <%}%>
+             <%}%>
+
+           <%})%>
+
+                    </table>
+                    
+                </div>
+                
+                 </div>
+             </div>
+           
+            <div class="col-md-6 text-center">
+                 <div class="panel panel-primary">
+                    <div class="panel-heading">8th sem</div>
+                <div class="panel-body">
+
+                     <table class="table">
+                      <tr>  <th margin=>code</th><th>credit</th><th>marks</th> </tr>
+          <% marks.forEach(function(mark){ %>
+
+            <% if(mark.student.username==student) {%>
+
+                <% if(mark.Semester==8) {%>
+                <tr>
+                     <td>
+                    <%=mark.code%>
+                        
+                    </td>
+                    <td><%=mark.merit%></td>
+                    <td><%=mark.grade%></td>
+                </tr>
+                  <%}%>
+             <%}%>
+
+           <%})%>
+
+                    </table>
+                    
+                </div>
+                
+                 </div>
+             </div>
+      
+    </div>
+
+</div>
+
+<% include ../partials/footer %>

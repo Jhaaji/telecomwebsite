@@ -2,7 +2,7 @@
   "name": "gyaanbaato",
   "version": "1.0.0",
   "engines": {
-    "node":"11.12.0",
+    "node": "11.12.0",
     "npm": "6.7.0"
   },
   "description": "raise your questions and have them answered ",
@@ -16,7 +16,7 @@
   "dependencies": {
     "async": "^2.6.2",
     "body-parser": "^1.18.3",
-    "locus":"2.0.1",
+    "locus": "2.0.1",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "express-session": "^1.15.6",
