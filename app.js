@@ -13,7 +13,7 @@ var nodemailer=require("nodemailer");
 var crypto=require("crypto");
 var methodOverride=require("method-override");
 
-
+const port = process.env.PORT || 3000
 //comments
 mongoose.set('useCreateIndex', true);
 //Passport configuration
@@ -495,6 +495,6 @@ function isLoggedIn(req, res, next) {
 }
 
 
-app.listen(3000,'127.0.0.1',function(){
+app.listen(port,'127.0.0.1',function(){
     console.log("server started");
 });
