@@ -495,6 +495,6 @@ function isLoggedIn(req, res, next) {
 }
 
 
-app.listen(port,'127.0.0.1',function(){
+app.listen(port,function(){
     console.log("server started");
 });
